@@ -20,6 +20,10 @@ $rem: 14;
   box-sizing: inherit;
 }
 
+.sds-checkbox label::after{
+  box-sizing: content-box;
+}
+
 body{
   background-color: var(--color-slate-95);
   line-height: (21 / $rem);
