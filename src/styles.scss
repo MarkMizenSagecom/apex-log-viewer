@@ -1,1 +1,130 @@
-/* You can add global styles to this file, and also import other style files */
+$rem: 14;
+
+@use "../node_modules/ag-grid-community/src/styles/ag-grid.scss";
+@use "../node_modules/ag-grid-community/src/styles/ag-theme-alpine/sass/ag-theme-alpine-mixin.scss" as *;
+
+// @use '../node_modules/@sage/ng-carbon/assets/fonts.css';
+@use '../node_modules/@sage/ng-carbon/assets/themes/medium.css';
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+
+
+:root{
+  font-size: 14px;
+  font-family: var(--font-default-body, sans-serif);
+  box-sizing: border-box;
+}
+
+*, *::before, *::after{
+  box-sizing: inherit;
+}
+
+body{
+  background-color: var(--color-slate-95);
+  line-height: (21 / $rem);
+}
+
+.ag-theme-alpine {
+  @include ag-theme-alpine();
+}
+
+.apex-log-viewer {
+  .ag-theme-alpine {
+    box-sizing: content-box;
+
+    font-size: 1rem;
+    font-family: inherit;
+
+    --ag-header-background-color: var(--color-slate-20);
+    --ag-header-foreground-color: #fff;
+
+    --ag-secondary-foreground-color: rgba(255, 255, 255, 0.9);
+    --ag-alpine-active-color: var(--color-primary);
+
+    --ag-border-color: #CCD6DB;
+    --ag-row-border-color: var(--color-slate-20);
+
+    --ag-column-border-color: var(--color-slate-20);
+    --ag-row-border-color: var(--color-slate-20);
+
+    --ag-foreground-color: var(--color-black-90);
+    --ag-background-color: var(--color-white);
+
+    .ag-pinned-left-header,
+    .ag-header-row {
+      --ag-border-color: #668592;
+    }
+    .ag-header-group-cell {
+      -webkit-font-smoothing: antialiased;
+    }
+    .ag-header-cell-menu-button {
+      cursor: pointer;
+      --ag-alpine-active-color: #fff;
+    }
+    .ag-header-icon {
+      opacity: 1 !important;
+    }
+    .ag-root-wrapper {
+      border-radius: 0;
+      border-top: none;
+    }
+    .ag-row {
+      border: none;
+    }
+    .ag-header-cell-resize::after {
+      top: 0;
+      height: 100%;
+    }
+    .ag-cell {
+      border-top: none;
+      padding-left: 16px;
+      padding-right: 16px;
+      &[col-id="message"] {
+        -webkit-user-select: text;
+        -moz-user-select: text;
+        -ms-user-select: text;
+        user-select: text;
+      }
+      &[col-id="diff"] {
+        padding: 0;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        line-height: 1;
+        font-weight: 700;
+        font-size: 1rem;
+        .diff {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 20px;
+          height: 20px;
+          border: 1px solid var(--color-slate-40);
+          cursor: help;
+          &--changes {
+            color: white;
+            background: var(--color-warning);
+          }
+          &--no-changes {
+            color: var(--color-slate-40);
+          }
+          &--new {
+            color: white;
+            background: var(--color-success);
+          }
+          &--removed {
+            color: white;
+            background: var(--color-error);
+          }
+        }
+      }
+    }
+
+    .ag-header {
+      --ag-border-color: var(--color-slate-90);
+    }
+  }
+}

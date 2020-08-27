@@ -1,0 +1,49 @@
+
+:host{
+  display: block;
+  margin-bottom: 16px;
+}
+
+.section-header {
+  background: #d3d3d3;
+  font-size: 1.15rem;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.button-container {
+  &__header {
+    margin-bottom: 4px;
+  }
+}
+
+.category-container {
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.category {
+  display: inline-block;
+  font-family: 'Source Code Pro', monospace;
+  overflow: hidden;
+  padding: 4px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1 0 25%;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.category__checkbox {
+  vertical-align: middle;
+}
+
+.category__label {
+  vertical-align: middle;
+}
+
+sgpc-heading{
+  display: block;
+  margin-bottom: 8px;
+}

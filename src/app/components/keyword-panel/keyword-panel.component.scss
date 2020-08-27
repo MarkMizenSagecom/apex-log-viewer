@@ -1,0 +1,29 @@
+:host{
+  display: block;
+  margin-bottom: 16px;
+}
+
+.label-text{
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.25;
+  margin-bottom: 8px;
+  display: block;
+}
+
+label {
+  display: block;
+  max-width: 100%;
+  width: 260px;
+}
+
+.section-header {
+  background: #d3d3d3;
+  font-size: 1.15rem;
+  font-weight: bold;
+  padding: 10px;
+}
+
+#keyword-filter {
+  margin-left: 10px;
+}

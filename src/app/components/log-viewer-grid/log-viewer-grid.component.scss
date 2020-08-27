@@ -1,0 +1,40 @@
+.apex-log-viewer-grid {
+  position: relative;
+  .ag-theme-alpine {
+    font-family: "Source Code Pro", monospace;
+    font-size: 1rem;
+    .ag-header-row {
+      font-size: 12px;
+    }
+
+    .ag-cell {
+      line-height: 1.5;
+      padding: 8px 16px;
+      -webkit-user-select: text;
+      -moz-user-select: text;
+      -ms-user-select: text;
+      user-select: text;
+
+      &[aria-colindex="1"],
+      &[aria-colindex="2"]{
+        color: var(--color-red);
+      }
+      &[aria-colindex="3"]{
+        color: var(--color-info);
+      }
+    }
+  }
+}
+
+.jump{
+  margin: 8px 0;
+  text-align: right;
+  sds-link{
+    display: inline-block;
+    margin: 0 8px;
+  }
+  sds-icon{
+    display: inline-block;
+    margin-left: 4px;
+  }
+}

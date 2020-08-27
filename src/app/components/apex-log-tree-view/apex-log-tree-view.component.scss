@@ -1,0 +1,33 @@
+.log-tree{
+  display: flex;
+  flex-direction: column;
+  min-height: 480px;
+  &__root{
+    position: relative;
+    margin: 8px 16px 32px;
+    .bar {
+      display: block;
+      position: absolute;
+      top: -16px;
+      bottom: 18px;
+      left: 0;
+      width: 6px;
+      border-left:2px solid var(--color-slate-60);
+      cursor: pointer;
+      z-index: 2;
+      &:hover{
+        border-color: var(--color-slate-40);
+      }
+    }
+  }
+}
+
+sds-button{
+  display: block;
+  margin-left: auto;
+}
+
+sds-loader{
+  display: block;
+  margin: auto;
+}

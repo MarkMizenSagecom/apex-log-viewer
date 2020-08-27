@@ -1,0 +1,103 @@
+#top {
+  position: absolute;
+  top: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.page-header {
+  margin: 16px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.limit-warning {
+  background: #ffcbcb;
+  border: 1px #cf0000 solid;
+  border-radius: 5px;
+  margin: auto;
+  max-width: 60%;
+  padding: 15px;
+}
+
+.section-header {
+  font-size: 2rem;
+  margin: 0 0 8px;
+
+  &__inline {
+    display: inline-block;
+  }
+}
+
+.filters-section {
+  display: flex;
+  margin: auto;
+  flex-wrap: wrap;
+}
+
+.upload-panel {
+  border: 3px dashed #d3d3d3;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20vh;
+  margin-bottom: 20vh;
+  max-width: 600px;
+  padding: 70px;
+  text-align: center;
+  width: 70%;
+
+  &__prompt {
+    font-size: 2.25rem;
+    margin-bottom: 20px;
+  }
+
+  &__drop-text {
+    margin-top: 20px;
+  }
+}
+
+.upload-button {
+  padding: 20px;
+}
+
+.progress-counter {
+  font-size: 1.5rem;
+}
+
+.scroll-icon {
+  font-size: 1.5rem;
+  margin-left: 5px;
+  padding: 5px;
+}
+
+.scroll-icon:hover,
+.scroll-icon:hover {
+  font-size: 1.5rem;
+  margin-left: 5px;
+  padding: 5px;
+}
+
+.link-icon {
+  &:link {
+    color: #c9c9c9;
+  }
+
+  &:visited {
+    color: #c9c9c9;
+  }
+
+  &:focus {
+    color: #3f3f3f
+  }
+
+  &:active {
+    color: #3f3f3f;
+  }
+
+  &:hover {
+    color: #3f3f3f;
+  }
+}

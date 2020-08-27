@@ -1,0 +1,80 @@
+<div class="apex-log-viewer">
+  <div *ngIf="allEntries && allEntries.length > 0; else upload">
+    <div class="page-header">
+      <h1>Log: {{ filename }}</h1>
+      <sds-button [destructive]="true" (clickEvent)="clearLog()">Clear</sds-button>
+    </div>
+
+    <aside class="limit-warning" *ngIf="showLimitWarning">
+      This log has reached the maximum size. Later entries may be missing.
+    </aside>
+
+    <h2 class="section-header">Filters</h2>
+
+    <apex-log-viewer-keyword-panel
+      (changeKeywordFilter)="changeKeywordFilter($event)"
+    >
+    </apex-log-viewer-keyword-panel>
+
+    <apex-log-viewer-log-categories
+      [categories]="categories"
+      [categoryMap]="categoryMap"
+      (changeCategory)="changeCategory($event)"
+      (showOnlyCategories)="showOnlyCategories($event)"
+      (hideOnlyCategories)="hideOnlyCategories($event)"
+    >
+    </apex-log-viewer-log-categories>
+
+    <sds-tabs
+      size="large"
+      borders="false"
+      position="top"
+      [contentContainer]="false"
+      [renderHiddenTabs]="false"
+    >
+      <sds-tab>
+        <sds-tab-header [active]="true">Table View</sds-tab-header>
+        <sds-tab-content>
+          <apex-log-viewer-grid [entries]="filteredEntries">
+          </apex-log-viewer-grid>
+        </sds-tab-content>
+      </sds-tab>
+      <sds-tab>
+        <sds-tab-header>Tree View</sds-tab-header>
+        <sds-tab-content>
+          <apex-log-tree-view [categories]="categoryMap" [entries]="filteredEntries"></apex-log-tree-view>
+        </sds-tab-content>
+      </sds-tab>
+    </sds-tabs>
+  </div>
+
+  <ng-template #upload>
+    <div class="upload-panel" fileDropper (filesUploaded)="handleFiles($event)">
+      <ng-container *ngIf="linesParsed === 0; else parsing">
+        <h1 class="upload-panel__prompt">Select Log File</h1>
+        <input
+          class="hidden"
+          #fileInput
+          type="file"
+          accept=".log"
+          (change)="handleFiles($event.target.files)"
+        />
+        <sds-button size="large" (clickEvent)="triggerFileSelection()"
+          >Browse</sds-button
+        >
+
+        <p class="upload-panel__drop-text">Or drop a file here.</p>
+      </ng-container>
+
+      <ng-template #parsing>
+        <h1 class="upload-panel__prompt">Parsing Log File…</h1>
+        <sds-progress-bar
+          color="info"
+          size="large"
+          [value]="linesParsed"
+          [max]="numLines"
+        ></sds-progress-bar>
+      </ng-template>
+    </div>
+  </ng-template>
+</div>

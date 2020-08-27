@@ -1,0 +1,25 @@
+<div class="button-container">
+  <h3>Quick Select:</h3>
+
+  <sds-button-toggle-group [formGroup]="form" iconSize="large" [grouped]="true">
+    <sds-button-toggle name="quick-select" formControlName="quick-select" value="default">Default</sds-button-toggle>
+    <sds-button-toggle name="quick-select" formControlName="quick-select" value="all">All</sds-button-toggle>
+    <sds-button-toggle name="quick-select" formControlName="quick-select" value="none">None</sds-button-toggle>
+    <sds-button-toggle name="quick-select" formControlName="quick-select" value="debug">Debug</sds-button-toggle>
+    <sds-button-toggle name="quick-select" formControlName="quick-select" value="database">Database</sds-button-toggle>
+    <sds-button-toggle name="quick-select" formControlName="quick-select" value="methods">Methods</sds-button-toggle>
+  </sds-button-toggle-group>
+
+</div>
+
+<ul class="category-container">
+  <li class="category" *ngFor="let cat of categories">
+    <sds-checkbox
+      [ngModel]="categoryMap.get(cat)"
+      identifier="cat-{{cat}}"
+      (change)="categoryChanged($event, cat)"
+    >
+      <span style="margin-left: 10px;">{{ cat }}</span>
+    </sds-checkbox>
+  </li>
+</ul>
