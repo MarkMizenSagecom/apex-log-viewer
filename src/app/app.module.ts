@@ -19,8 +19,8 @@ import { ButtonToggleModule } from '@sage/ng-carbon/button-toggle';
 import { IconModule } from '@sage/ng-carbon/icon';
 import { LinkModule } from '@sage/ng-carbon/link';
 import { ProgressBarModule } from '@sage/ng-carbon/progress-bar';
-import { ApexLogTreeView } from './components/apex-log-tree-view/apex-log-tree-view.component';
-import { ApexLogTreeNode } from './components/apex-log-tree-node/apex-log-tree-node.component';
+import { ApexLogTreeViewComponent } from './components/apex-log-tree-view/apex-log-tree-view.component';
+import { ApexLogTreeNodeComponent } from './components/apex-log-tree-node/apex-log-tree-node.component';
 import { LoaderModule } from '@sage/ng-carbon/loader';
 import { TooltipModule } from '@sage/ng-carbon/tooltip';
 import { TabsModule } from '@sage/ng-carbon/tabs';
@@ -34,8 +34,8 @@ import { TreeService } from './services/tree/tree.service';
     LogCategoriesComponent,
     FileDropperDirective,
     LogGridViewComponent,
-    ApexLogTreeView,
-    ApexLogTreeNode
+    ApexLogTreeViewComponent,
+    ApexLogTreeNodeComponent
   ],
   imports: [
     BrowserModule,

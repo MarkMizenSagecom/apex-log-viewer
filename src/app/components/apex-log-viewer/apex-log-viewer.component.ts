@@ -41,8 +41,7 @@ export class ApexLogViewerComponent implements LogParserListener {
 
     // Read file contents
     const reader: FileReader = new FileReader();
-    reader.onload = (event: ProgressEvent) =>
-      this.processLogFile(<string>(<FileReader>event.target).result);
+    reader.onload = (event: ProgressEvent) => this.processLogFile((event.target as FileReader).result as string);
     reader.readAsText(file);
   }
 

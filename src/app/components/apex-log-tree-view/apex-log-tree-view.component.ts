@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, ChangeDetectorRef, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { LogEntry } from '../../models/log-entry';
 import { TreeNode } from '../../models/tree';
 import { TreeService } from '../../services/tree/tree.service';
@@ -26,7 +26,7 @@ import { TreeService } from '../../services/tree/tree.service';
   styleUrls: ['./apex-log-tree-view.component.scss']
 
 })
-export class ApexLogTreeView implements OnChanges {
+export class ApexLogTreeViewComponent implements OnChanges, OnDestroy {
   @Input() entries: LogEntry[];
   @Input() categories: Map<string, boolean>;
 
@@ -41,7 +41,7 @@ export class ApexLogTreeView implements OnChanges {
     private _cd: ChangeDetectorRef
   ) {
     if (typeof Worker !== 'undefined') {
-      this._worker = new Worker('../../workers/tree.worker.ts', { type: 'module' })
+      this._worker = new Worker('../../workers/tree.worker.ts', { type: 'module' });
       this._worker.onmessage = ({ data }) => this.handleWorkerMessage(data);
     } else {
       console.warn('Service workers not supported');
@@ -88,7 +88,7 @@ export class ApexLogTreeView implements OnChanges {
       if (!this._checkCategories(this.categories)) {
         console.error('Unsupported categories');
         return;
-      };
+      }
       this.loading = true;
       const entries = [...changes.entries.currentValue];
       this._worker?.postMessage(entries);

@@ -11,7 +11,7 @@ export interface LogParserListener {
 export class LogParser {
 
   private static readonly MAXIMUM_LOG_SIZE_NOTICE =
-      '*********** MAXIMUM DEBUG LOG SIZE REACHED ***********';
+    '*********** MAXIMUM DEBUG LOG SIZE REACHED ***********';
 
   private static readonly BATCH_SIZE = 200;
 
@@ -21,12 +21,10 @@ export class LogParser {
 
   public limitReached = false;
 
-  public constructor(private listener: LogParserListener) {}
+  public constructor(private listener: LogParserListener) { }
 
   /**
    * Parses a log file and notifies the listener of progress.
-   *
-   * @param fileContents
    */
   public parse(fileContents: string): void {
 
@@ -41,15 +39,11 @@ export class LogParser {
    * After completing a batch, schedules the next batch.
    *
    * After all batches have been parsed, notifies the listener.
-   *
-   * @param lines
-   * @param startIndex
-   * @param batchSize
    */
   private parseNextBatch(
-      lines: string[],
-      startIndex: number,
-      batchSize: number): void {
+    lines: string[],
+    startIndex: number,
+    batchSize: number): void {
 
     // Determine end index (the next index AFTER this batch)
     let endIndex = startIndex + batchSize;
@@ -83,8 +77,6 @@ export class LogParser {
 
   /**
    * Parses a single line of a log file.
-   *
-   * @param line
    */
   private parseLine(line: string): LogEntry | null {
 
@@ -95,22 +87,22 @@ export class LogParser {
     // First line
     if (this.allEntries.length === 0) {
       const timestamp: string = 'START';
-      const timeElapsed: number = 0;
-      const type: string = 'HEADER';
+      const timeElapsed = 0;
+      const type = 'HEADER';
       const message: string = line;
       return { timestamp, timeElapsed, type, message };
 
-    // Maximum debug log size reached!
+      // Maximum debug log size reached!
     } else if (line === LogParser.MAXIMUM_LOG_SIZE_NOTICE) {
       const prevEntry: LogEntry = this.allEntries[this.allEntries.length - 1];
       const timestamp: string = prevEntry.timestamp;
-      const timeElapsed: number = prevEntry.timeElapsed;
-      const type: string = 'NOTICE';
+      const timeElapsed = prevEntry.timeElapsed;
+      const type = 'NOTICE';
       const message: string = line;
       this.limitReached = true;
       return { timestamp, timeElapsed, type, message };
 
-    // Continuation line
+      // Continuation line
     } else if (!this.hasTimestamp(line)) {
       this.parseContinuationLine(line);
       return null;
@@ -125,7 +117,7 @@ export class LogParser {
     // All entries start with a timestamp
     const { timestamp, timeElapsed } = this.parseTimestamp(parts.shift() as string);
 
-    if (parts.length == 1) {
+    if (parts.length === 1) {
       // typeOrMessage
       const remainder: string = parts.shift() as string;
       let type: string;
@@ -139,9 +131,10 @@ export class LogParser {
       }
       return { timestamp, timeElapsed, type, message };
 
-    } else if (parts.length == 2) {
+    }
+    if (parts.length === 2) {
       // type | lineNumberOrMessage
-      let type: string = parts.shift() as string;
+      const type: string = parts.shift() as string;
       const remainder: string = parts.shift() as string;
       let lineNumber = '';
       let message = '';
@@ -152,23 +145,20 @@ export class LogParser {
       }
       return { timestamp, timeElapsed, type, lineNumber, message };
 
-    } else {
-      // type | lineNumber? | message
-      const type: string = parts.shift() as string;
-      const next: string = parts[0];
-      let lineNumber = '';
-      if (next.startsWith('[')) {
-        lineNumber = this.stripEnclosingPunctuation(parts.shift() as string);
-      }
-      const message: string = parts.join('|');
-      return { timestamp, timeElapsed, type, lineNumber, message };
     }
+    // type | lineNumber? | message
+    const type: string = parts.shift() as string;
+    const next: string = parts[0];
+    let lineNumber = '';
+    if (next.startsWith('[')) {
+      lineNumber = this.stripEnclosingPunctuation(parts.shift() as string);
+    }
+    const message: string = parts.join('|');
+    return { timestamp, timeElapsed, type, lineNumber, message };
   }
 
   /**
    * Checks if a line starts with a timestamp.
-   *
-   * @param line
    */
   private hasTimestamp(line: string): boolean {
     // Timestamps are of the form:
@@ -179,8 +169,6 @@ export class LogParser {
 
   /**
    * Appends a log line to the previous LogEntry.
-   *
-   * @param line
    */
   private parseContinuationLine(line: string): void {
     const prevEntry: LogEntry = this.allEntries[this.allEntries.length - 1];
@@ -194,10 +182,9 @@ export class LogParser {
   /**
    * Parses the "timestamp part" of a log file.
    *
-   * @param timestampPart Timestamp in the form 'HH:mm:ss.SSS (nanoseconds)'.
-   * @return The parsed values in the form { timestamp, timeElapsed }.
+   * Accepts Timestamp in the form 'HH:mm:ss.SSS (nanoseconds)'.
    */
-  private parseTimestamp(timestampPart: string): {timestamp: string, timeElapsed: number} {
+  private parseTimestamp(timestampPart: string): { timestamp: string, timeElapsed: number } {
     const parts: string[] = timestampPart.split(' ');
     const timestamp: string = parts[0];
     const timeElapsed: number = Number(this.stripEnclosingPunctuation(parts[1]));
@@ -206,8 +193,6 @@ export class LogParser {
 
   /**
    * Strips the first and last characters from a string.
-   *
-   * @param s
    */
   private stripEnclosingPunctuation(s: string): string {
     return s.substr(1, s.length - 2);

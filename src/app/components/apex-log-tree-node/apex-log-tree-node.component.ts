@@ -32,7 +32,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./apex-log-tree-node.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ApexLogTreeNode implements OnInit, OnDestroy {
+export class ApexLogTreeNodeComponent implements OnInit, OnDestroy {
 
   @Input()
   data: TreeNode;

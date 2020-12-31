@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { LogEntry } from '../../models/log-entry';
 import { GridReadyEvent, GridApi, ColDef, ColGroupDef } from 'ag-grid-community';
 
@@ -25,30 +25,7 @@ import { GridReadyEvent, GridApi, ColDef, ColGroupDef } from 'ag-grid-community'
   styleUrls: ['./log-viewer-grid.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class LogGridViewComponent {
-
-  @Input() entries: LogEntry[] = [];
-
-  private _gridApi: GridApi;
-
-  handleGridReady({ api }: GridReadyEvent): void {
-    this._gridApi = api;
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.entries) {
-      this._buildRows(changes.entries.currentValue);
-    }
-  }
-
-  private _buildRows(data: any) {
-    this.rows = data
-      .map((item: any) => ({
-        ...item,
-        message: item.message.trimEnd(),
-        showButton: item?.type === 'VARIABLE_ASSIGNMENT'
-      }));
-  }
+export class LogGridViewComponent implements OnChanges {
 
   defaultColDef: ColDef = {};
 
@@ -98,6 +75,31 @@ export class LogGridViewComponent {
 
 
   rows: any[] = [];
+
+  @Input() entries: LogEntry[] = [];
+
+  private _gridApi: GridApi;
+
+  handleGridReady({ api }: GridReadyEvent): void {
+    this._gridApi = api;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.entries) {
+      this._buildRows(changes.entries.currentValue);
+    }
+  }
+
+  private _buildRows(data: any) {
+    this.rows = data
+      .map((item: any) => ({
+        ...item,
+        message: item.message.trimEnd(),
+        showButton: item?.type === 'VARIABLE_ASSIGNMENT'
+      }));
+  }
+
+
 
   scrollToTop() {
     this._gridApi.ensureIndexVisible(0);

@@ -34,7 +34,7 @@ export class KeywordPanelComponent implements OnInit, OnDestroy {
     });
   }
 
-  keyword: string = '';
+  keyword = '';
 
   ngOnDestroy() {
     this.unsubscribe$.next();
