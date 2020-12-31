@@ -1,8 +1,8 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { ApexLogViewerComponent } from './apex-log-viewer.component';
 
 describe('ApexLogViewerComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         ApexLogViewerComponent
